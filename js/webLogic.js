@@ -8,3 +8,6 @@ menuButtons.forEach((button) => {
 });
 
 menuButtons[0].classList.add("selected")
+
+const canvas = document.getElementById("gameScreen");
+
