@@ -6,14 +6,16 @@ body {
     margin: 0;
     font-family: 'Trebuchet MS', sans-serif;
     background: #f5f7fa;
+    position: relative;
+    background-color: rgb(109, 76, 128); /*lets change this place holder background color with a background image or smt-quinn */
 }
 
 .page {
     width: min(90%, 900px);
     min-height: 90vh;
-    margin: 2rem auto;
+    margin: 0 auto;
     display: grid;
-    grid-template-rows: auto auto minmax(400px, 1fr) auto;
+    grid-template-rows: auto minmax(400px, 1fr) auto;    
 }
 
 #title-container {
@@ -23,12 +25,12 @@ body {
     padding: 0.5rem;
 }
 
-#menu-container,
 #player-list {
     display: flex;
+    height: 44px;
+    background-color: whitesmoke;
 }
 
-#menu-container > *,
 #player-list > * {
     flex: 1;
     text-align: center;
@@ -40,6 +42,8 @@ main {
     position: relative;
     background: white;
     border: 1px solid #60758f;
+    height: 450px;
+    background-color: whitesmoke;
 }
 div{
      user-select: none;
@@ -52,4 +56,40 @@ div{
 .menu-button.selected {
     background-color: rgb(55, 55, 55);
     color: white;
+}
+
+#leaderBoard{
+    position: fixed;
+    top: 100px;
+    left: 20px;
+    right: auto;
+
+    width: 250px;
+    height: 639px;
+
+    margin: 0;
+    border: solid black 1px;
+    background-color: whitesmoke;
+}
+
+#settings{
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    left: auto;
+
+    width: 250px;
+    height: 639px;
+
+    margin: 0;
+    border: solid black 1px;
+    background-color: whitesmoke;
+}
+#LB-header{
+    padding-left: 25px;
+    text-decoration: underline;
+}
+#S-header{
+    padding-left: 80px;
+    text-decoration: underline;
 }
