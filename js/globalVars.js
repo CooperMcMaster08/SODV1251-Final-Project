@@ -1,5 +1,7 @@
-const settingsButton = document.getElementById("settings-button")
-const playButton = document.getElementById("play-button")
-const accountButton = document.getElementById("account-button")
-const statsButton = document.getElementById("statistics-button")
-const menuButtons =[playButton,accountButton,statsButton,settingsButton]
+const canvas = document.querySelector("canvas")
+const gameDisplay = document.getElementById("game-display")
+const c = canvas.getContext('2d')
+const canvasWidth = gameDisplay.width
+const canvasHeight= gameDisplay.height
+
+c.fillRect(0,0,canvasWidth,canvasHeight)
