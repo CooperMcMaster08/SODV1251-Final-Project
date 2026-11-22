@@ -1,136 +1,673 @@
+/* =========================================================
+   FIGHT GAME - MAIN WEBSITE STYLE
+   ========================================================= */
+
 * {
     box-sizing: border-box;
 }
 
+html {
+    min-height: 100%;
+}
+
 body {
     margin: 0;
-    font-family: 'Trebuchet MS', sans-serif;
-    background: #f5f7fa;
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    font-family: Impact, "Arial Black", "Trebuchet MS", sans-serif;
+    color: #f5f5f5;
+
+    background:
+        radial-gradient(
+            circle at 50% 15%,
+            rgba(255, 69, 0, 0.22),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #050505 0%,
+            #120404 35%,
+            #050505 70%,
+            #170000 100%
+        );
+
     position: relative;
-    background-color: rgb(109, 76, 128); /*lets change this place holder background color with a background image or smt-quinn */
 }
+
+
+/* =========================================================
+   BACKGROUND EFFECT
+   ========================================================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            115deg,
+            transparent 0px,
+            transparent 70px,
+            rgba(255, 0, 0, 0.025) 71px,
+            rgba(255, 0, 0, 0.025) 73px
+        );
+
+    z-index: -1;
+}
+
+
+/* =========================================================
+   MAIN PAGE
+   ========================================================= */
 
 .page {
     width: min(94%, 1200px);
-    margin: 0 auto;
+    margin: 30px auto;
+
     display: grid;
     grid-template-rows: auto auto auto;
+
+    border: 2px solid #7b0b0b;
+
+    background: #090909;
+
+    box-shadow:
+        0 0 20px rgba(255, 0, 0, 0.4),
+        0 0 60px rgba(0, 0, 0, 0.9);
 }
+
+
+/* =========================================================
+   GAME TITLE
+   ========================================================= */
 
 #title-container {
-    background: #243d5c;
-    color: white;
+    position: relative;
+
+    padding: 18px 10px;
+
     text-align: center;
-    padding: 0.5rem;
+
+    background:
+        linear-gradient(
+            180deg,
+            #2a0000 0%,
+            #110000 55%,
+            #050505 100%
+        );
+
+    border-bottom: 3px solid #ff3c00;
+
+    overflow: hidden;
 }
 
-#player-list {
-    display: flex;
-    height: 44px;
-    background-color: whitesmoke;
+
+/* red glow behind title */
+
+#title-container::before {
+    content: "";
+    position: absolute;
+
+    width: 500px;
+    height: 120px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255, 55, 0, 0.28),
+            transparent 70%
+        );
+
+    pointer-events: none;
 }
 
-#player-list > * {
-    flex: 1;
-    text-align: center;
-    padding: 0.75rem;
-    border: 1px solid #60758f;
+
+#title-element {
+    position: relative;
+
+    margin: 0;
+
+    font-size: clamp(2.4rem, 5vw, 4.6rem);
+
+    letter-spacing: 5px;
+    text-transform: uppercase;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 3px 0 #7b0000,
+        0 5px 0 #330000,
+        0 0 10px #ff3300,
+        0 0 25px rgba(255, 51, 0, 0.8);
+
+    transform: skew(-4deg);
 }
+
+
+#subtitle-element {
+    position: relative;
+
+    margin: 4px 0 0;
+
+    font-family: "Trebuchet MS", sans-serif;
+
+    font-size: 1rem;
+
+    letter-spacing: 7px;
+    text-transform: uppercase;
+
+    color: #ffb300;
+
+    text-shadow:
+        0 0 8px rgba(255, 179, 0, 0.8);
+}
+
+
+/* =========================================================
+   GAME AREA
+   ========================================================= */
 
 main {
     position: relative;
-    background: white;
-    border: 1px solid #60758f;
+
     height: clamp(450px, 68vh, 760px);
-    background-color: whitesmoke;
+
+    background:
+        linear-gradient(
+            180deg,
+            #151515 0%,
+            #050505 100%
+        );
+
+    border-top: 1px solid #400000;
+    border-bottom: 1px solid #400000;
+
+    box-shadow:
+        inset 0 0 35px rgba(0, 0, 0, 0.95);
 }
+
+
+/* glowing inner arena border */
+
+main::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+
+    border: 1px solid rgba(255, 80, 0, 0.3);
+
+    pointer-events: none;
+
+    box-shadow:
+        inset 0 0 15px rgba(255, 0, 0, 0.15);
+}
+
 
 #game-display {
     display: block;
+
     width: 100%;
     height: 100%;
-}
-div{
-     user-select: none;
-}
-.menu-button {
-    background-color: rgb(132, 132, 132);
-    cursor: pointer;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #181818,
+            #050505 75%
+        );
 }
 
+
+/* =========================================================
+   PLAYER BAR
+   ========================================================= */
+
+#player-list {
+    display: flex;
+
+    min-height: 60px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #181818,
+            #090909
+        );
+
+    border-top: 3px solid #ff3c00;
+}
+
+
+#player-list > * {
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.9rem;
+
+    border-right: 1px solid #441111;
+
+    font-size: 0.9rem;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    color: #d8d8d8;
+
+    background:
+        linear-gradient(
+            180deg,
+            #1c1c1c,
+            #0b0b0b
+        );
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease,
+        color 0.15s ease;
+}
+
+
+#player-list > *:last-child {
+    border-right: none;
+}
+
+
+#player-list > *:hover {
+    background:
+        linear-gradient(
+            180deg,
+            #3b0909,
+            #170303
+        );
+
+    color: white;
+
+    text-shadow:
+        0 0 8px #ff3c00;
+}
+
+
+/* =========================================================
+   GENERAL DIV SETTINGS
+   ========================================================= */
+
+div {
+    user-select: none;
+}
+
+
+/* =========================================================
+   MENU BUTTONS
+   ========================================================= */
+
+.menu-button {
+    padding: 12px 18px;
+
+    border: 1px solid #631212;
+
+    background:
+        linear-gradient(
+            180deg,
+            #252525,
+            #101010
+        );
+
+    color: #d8d8d8;
+
+    font-family: Impact, "Arial Black", sans-serif;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease,
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+.menu-button:hover {
+    color: white;
+
+    background:
+        linear-gradient(
+            180deg,
+            #7c1600,
+            #350600
+        );
+
+    transform: translateX(4px);
+
+    box-shadow:
+        -4px 0 0 #ff7b00,
+        0 0 15px rgba(255, 60, 0, 0.5);
+}
+
+
 .menu-button.selected {
-    background-color: rgb(55, 55, 55);
+    color: white;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ad1200,
+            #4d0500
+        );
+
+    box-shadow:
+        inset 5px 0 0 #ffb000,
+        0 0 15px rgba(255, 47, 0, 0.45);
+
+    text-shadow:
+        0 0 8px #ff5e00;
+}
+
+
+/* =========================================================
+   SIDEBAR PANELS
+   ========================================================= */
+
+#leaderBoard,
+#settings {
+    position: fixed;
+
+    top: 100px;
+
+    width: 250px;
+    height: 639px;
+
+    margin: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(24, 24, 24, 0.98),
+            rgba(6, 6, 6, 0.98)
+        );
+
+    border: 1px solid #731414;
+
+    box-shadow:
+        0 0 25px rgba(0, 0, 0, 0.85),
+        inset 0 0 25px rgba(150, 0, 0, 0.08);
+
+    overflow: hidden;
+}
+
+
+#leaderBoard {
+    left: 20px;
+    right: auto;
+}
+
+
+#settings {
+    right: 20px;
+    left: auto;
+}
+
+
+/* accent line */
+
+#leaderBoard::before,
+#settings::before {
+    content: "";
+
+    display: block;
+
+    width: 100%;
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ff3500,
+            #ffae00,
+            #ff3500,
+            transparent
+        );
+
+    box-shadow:
+        0 0 12px rgba(255, 70, 0, 0.7);
+}
+
+
+/* =========================================================
+   SIDEBAR HEADERS
+   ========================================================= */
+
+#LB-header,
+#S-header {
+    margin: 0;
+
+    padding: 17px 10px;
+
+    text-align: center;
+
+    font-size: 1rem;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            180deg,
+            #280606,
+            #100202
+        );
+
+    border-bottom: 1px solid #631212;
+
+    text-shadow:
+        0 0 8px rgba(255, 58, 0, 0.9);
+}
+
+
+/* =========================================================
+   OPTIONAL LEADERBOARD ROW STYLING
+   Use later when leaderboard entries are added
+   ========================================================= */
+
+.leaderboard-entry {
+    display: grid;
+
+    grid-template-columns: 35px 1fr auto;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 12px;
+
+    border-bottom: 1px solid #292929;
+
+    font-family: "Trebuchet MS", sans-serif;
+
+    color: #cfcfcf;
+}
+
+
+.leaderboard-entry:hover {
+    background: #240606;
+
     color: white;
 }
 
-#leaderBoard{
-    position: fixed;
-    top: 100px;
-    left: 20px;
-    right: auto;
 
-    width: 250px;
-    height: 639px;
+.leaderboard-rank {
+    color: #ff9d00;
 
-    margin: 0;
-    border: solid black 1px;
-    background-color: whitesmoke;
+    font-weight: bold;
 }
 
-#settings{
-    position: fixed;
-    top: 100px;
-    right: 20px;
-    left: auto;
 
-    width: 250px;
-    height: 639px;
+.leaderboard-score {
+    color: #ff4b21;
 
-    margin: 0;
-    border: solid black 1px;
-    background-color: whitesmoke;
+    font-weight: bold;
 }
-#LB-header{
-    text-decoration: underline;
-    text-align: center;
+
+
+/* =========================================================
+   SETTINGS ITEMS
+   ========================================================= */
+
+.setting-item {
+    padding: 14px;
+
+    border-bottom: 1px solid #292929;
+
+    font-family: "Trebuchet MS", sans-serif;
+
+    color: #bfbfbf;
 }
-#S-header{
-    text-decoration: underline;
-    text-align: center;
+
+
+.setting-item:hover {
+    color: white;
+
+    background: #1c0505;
 }
+
+
+/* =========================================================
+   SCROLLBARS
+   ========================================================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+
+::-webkit-scrollbar-track {
+    background: #080808;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: #761100;
+
+    border-radius: 4px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background: #c32000;
+}
+
+
+/* =========================================================
+   RESPONSIVE LAYOUT
+   ========================================================= */
 
 @media (max-width: 1760px) {
+
     body {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
         gap: 1rem;
+
         padding: 1rem;
     }
 
+
     .page {
         grid-column: 1 / -1;
+
         width: min(94%, 1200px);
+
+        margin: 10px auto;
     }
+
 
     #leaderBoard,
     #settings {
         position: static;
+
         width: 100%;
         height: auto;
-        min-height: 200px;
+
+        min-height: 220px;
     }
 }
 
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
 @media (max-width: 640px) {
+
     body {
         grid-template-columns: minmax(0, 1fr);
+
+        padding: 0.5rem;
     }
+
 
     .page {
         width: 100%;
+
+        margin: 0;
     }
+
+
+    #title-element {
+        font-size: 2.2rem;
+
+        letter-spacing: 3px;
+    }
+
+
+    #subtitle-element {
+        font-size: 0.7rem;
+
+        letter-spacing: 4px;
+    }
+
 
     main {
         height: clamp(360px, 65vh, 560px);
+    }
+
+
+    #player-list {
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    #player-list > * {
+        min-height: 50px;
+
+        border-bottom: 1px solid #441111;
+    }
+
+
+    #leaderBoard,
+    #settings {
+        width: 100%;
     }
 }
