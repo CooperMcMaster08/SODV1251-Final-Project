@@ -1,0 +1,7 @@
+node_modules/
+.env
+
+# Optional local/dev files
+users.json
+npm-debug.log*
+.DS_Store
