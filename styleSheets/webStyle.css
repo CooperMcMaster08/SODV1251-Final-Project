@@ -5,24 +5,41 @@
 body {
     margin: 0;
     font-family: 'Trebuchet MS', sans-serif;
-    background: #f5f7fa;
-    position: relative;
-    background-color: rgb(109, 76, 128); /*lets change this place holder background color with a background image or smt-quinn */
+    background: rgb(109, 76, 128);
+    /* GPT: Bound the layout to the viewport and reserve the widest column for the game. */
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 900px) minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 1rem;
+    align-items: stretch;
+    width: 100%;
+    max-width: 1500px;
+    height: 100vh;
+    height: 100dvh;
+    margin-inline: auto;
+    padding: 1rem;
+    overflow: hidden;
 }
 
 .page {
-    width: min(90%, 900px);
-    min-height: 90vh;
-    margin: 0 auto;
     display: grid;
-    grid-template-rows: auto minmax(400px, 1fr) auto;    
+    /* GPT: Let the middle row expand while the title and player list keep their natural size. */
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
 }
 
 #title-container {
-    background: #243d5c;
+    padding: 0.5rem;
     color: white;
     text-align: center;
-    padding: 0.5rem;
+    background: #243d5c;
 }
 
 #player-list {
@@ -33,63 +50,121 @@ body {
 
 #player-list > * {
     flex: 1;
-    text-align: center;
+    min-width: 0;
     padding: 0.75rem;
     border: 1px solid #60758f;
+    text-align: center;
 }
 
 main {
     position: relative;
-    background: white;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
     border: 1px solid #60758f;
-    height: 450px;
+    background: whitesmoke;
+}
+
+#gameScreen {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+}
+
+div {
+    user-select: none;
+}
+
+/* GPT: Keep panels inside their grid tracks and scroll their content only when needed. */
+#leaderBoard,
+#settings {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    overflow: auto;
+    border: 1px solid black;
     background-color: whitesmoke;
 }
-div{
-     user-select: none;
+
+#leaderBoard {
+    grid-column: 1;
+    grid-row: 1 / span 2;
 }
-.menu-button {
-    background-color: rgb(132, 132, 132);
+
+#login-button {
+    /* GPT: Keep login compact instead of sizing it like a full sidebar. */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 44px;
+    min-width: 0;
+    margin: 0;
+    border: 1px solid black;
+    background-color: whitesmoke;
     cursor: pointer;
+    grid-column: 3;
+    grid-row: 1;
+    text-align: center;
 }
 
-.menu-button.selected {
-    background-color: rgb(55, 55, 55);
-    color: white;
+#settings {
+    grid-column: 3;
+    grid-row: 2;
 }
 
-#leaderBoard{
-    position: fixed;
-    top: 100px;
-    left: 20px;
-    right: auto;
-
-    width: 250px;
-    height: 639px;
-
+#LB-header,
+#S-header {
     margin: 0;
-    border: solid black 1px;
-    background-color: whitesmoke;
-}
-
-#settings{
-    position: fixed;
-    top: 100px;
-    right: 20px;
-    left: auto;
-
-    width: 250px;
-    height: 639px;
-
-    margin: 0;
-    border: solid black 1px;
-    background-color: whitesmoke;
-}
-#LB-header{
-    padding-left: 25px;
+    padding: 1rem;
     text-decoration: underline;
+    text-align: center;
 }
-#S-header{
-    padding-left: 80px;
-    text-decoration: underline;
+
+/* GPT: On narrow screens, move the panels into a short row below the game. */
+@media (max-width: 1200px) {
+    body {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-rows: minmax(0, 1fr) auto;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .page {
+        grid-column: 1 / -1;
+        grid-row: 1;
+    }
+
+    #leaderBoard,
+    #login-button,
+    #settings {
+        grid-row: 2;
+        height: clamp(3.5rem, 11vh, 6rem);
+        overflow: hidden;
+    }
+
+    #leaderBoard {
+        grid-column: 1;
+    }
+
+    #login-button {
+        grid-column: 2;
+        align-self: center;
+        height: 44px;
+    }
+
+    #settings {
+        grid-column: 3;
+    }
+
+    #LB-header,
+    #S-header {
+        padding: 0.5rem 0.25rem;
+        font-size: 0.8rem;
+        line-height: 1.1;
+    }
 }
